@@ -11,7 +11,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 /**
- * 功能描述: XXXX
+ * 功能描述: Channel
  * <p/>
  * 创建人: chunlin.li
  * <p/>
