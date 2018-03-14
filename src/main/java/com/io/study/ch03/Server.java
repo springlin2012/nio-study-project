@@ -12,7 +12,7 @@ import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
 
 /**
- * 功能描述: Channel
+ * 功能描述: Channel Scatter I/O
  * <p/>
  * 创建人: chunlin.li
  * <p/>
