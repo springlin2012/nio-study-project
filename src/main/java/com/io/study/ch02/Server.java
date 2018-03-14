@@ -23,24 +23,40 @@ import java.nio.channels.SocketChannel;
 public class Server {
 
     public static void main(String[] args) {
+        ServerSocketChannel ssc = null;
+        SocketChannel socketChannel = null;
         try {
-            ServerSocketChannel ssc = ServerSocketChannel.open();
+            ssc = ServerSocketChannel.open();
             ssc.socket().bind(new InetSocketAddress("127.0.0.1", 8000));
-            SocketChannel socketChannel = ssc.accept();
+            socketChannel = ssc.accept();
+            socketChannel.configureBlocking(false);
 
             ByteBuffer readBuffer = ByteBuffer.allocate(128);
-            socketChannel.read(readBuffer);
+            ByteBuffer writeBuffer = ByteBuffer.allocate(128);
 
-            readBuffer.flip();
-            while (readBuffer.hasRemaining()) {
-                System.out.println((char) readBuffer.get());
+            while (true) {
+                socketChannel.read(readBuffer);
+                readBuffer.flip();
+                while (readBuffer.hasRemaining()) {
+                    System.out.println((char) readBuffer.get());
+                }
+
+                // 输出入流至客户端
+                writeBuffer.clear();
+                writeBuffer.put("hello client.".getBytes());
+                writeBuffer.flip();
+                socketChannel.write(writeBuffer);
             }
 
+            /*
             socketChannel.close();
             ssc.close();
+            */
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+
     }
 
 }

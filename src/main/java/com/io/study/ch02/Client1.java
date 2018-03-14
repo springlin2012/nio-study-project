@@ -6,9 +6,8 @@
  */
 package com.io.study.ch02;
 
-import java.io.*;
+import java.io.IOException;
 import java.net.InetSocketAddress;
-import java.net.Socket;
 import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
 
@@ -21,7 +20,7 @@ import java.nio.channels.SocketChannel;
  * <p/>
  * Copyright (c) 深圳市牛鼎丰科技有限公司-版权所有
  */
-public class Client {
+public class Client1 {
 
     public static void main(String[] args) throws IOException {
         SocketChannel socketChannel = null;
@@ -30,28 +29,14 @@ public class Client {
             socketChannel.connect(new InetSocketAddress("127.0.0.1", 8000));
 
             ByteBuffer writeBuffer = ByteBuffer.allocate(128);
-            writeBuffer.put("client: hello world".getBytes());
+            writeBuffer.put("client1: hello world".getBytes());
             writeBuffer.flip();
             socketChannel.write(writeBuffer);
 
-
-            ByteBuffer readBuffer = ByteBuffer.allocate(128);
-            while (true) {
-                socketChannel.read(readBuffer);
-                readBuffer.flip();
-
-                while (readBuffer.hasRemaining()) {
-                    System.out.print(readBuffer.get());
-                }
-
-                readBuffer.clear();
-            }
-
-            // socketChannel.close();
+            socketChannel.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
 }
