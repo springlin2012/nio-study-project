@@ -4,7 +4,7 @@
  * @author chunlin.li
  *
  */
-package com.nio.study.ch01;
+package com.io.study.other;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
